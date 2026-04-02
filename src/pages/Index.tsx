@@ -70,49 +70,60 @@ const Index = () => {
             <Shield className="w-6 h-6 text-primary" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {members.map((member) => {
-              const isLeader = member.tier === "leader";
-              const isOfficer = member.tier === "officer";
-              const isElite = member.tier === "elite";
-              return (
-                <div
-                  key={member.name}
-                  className={`group relative border rounded-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 ${
-                    isLeader
-                      ? "p-6 bg-primary/10 border-glow-red box-glow-red col-span-1 sm:col-span-2 lg:col-span-1 lg:col-start-2"
-                      : isOfficer
-                      ? "p-6 bg-neon-cyan/5 border-neon-cyan/40 box-glow-cyan"
-                      : "p-5 bg-card/50 border-border hover:border-primary/30"
-                  }`}
-                >
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className={`rounded-full flex items-center justify-center ${
-                      isLeader ? "w-14 h-14 bg-primary/20" : isOfficer ? "w-14 h-14 bg-neon-cyan/15" : "w-11 h-11 bg-secondary"
-                    }`}>
-                      <member.icon className={`${isLeader ? "w-7 h-7 text-primary" : isOfficer ? "w-7 h-7 text-neon-cyan" : "w-5 h-5 text-muted-foreground"}`} />
-                    </div>
-                    <div>
-                      <h3 className={`font-heading font-bold tracking-wide ${
-                        isLeader ? "text-lg text-primary text-glow-red" : isOfficer ? "text-lg text-neon-cyan text-glow-cyan" : "text-base text-foreground"
-                      }`}>
-                        {member.name}
-                      </h3>
-                      <p className={`text-sm font-medium mt-1 ${
-                        isLeader ? "text-primary/80" : isOfficer ? "text-neon-cyan/70" : "text-muted-foreground"
-                      }`}>
-                        {member.role}
-                      </p>
-                    </div>
-                    {isLeader && (
-                      <span className="font-heading text-[10px] tracking-[0.2em] uppercase bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/30">
-                        Founder
-                      </span>
-                    )}
+          {/* Leader Row */}
+          <div className="flex justify-center mb-6">
+            <div className="w-full max-w-sm p-6 border rounded-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-primary/10 border-glow-red box-glow-red">
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="w-14 h-14 rounded-full flex items-center justify-center bg-primary/20">
+                  <Crown className="w-7 h-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-heading text-lg font-bold tracking-wide text-primary text-glow-red">BUGRUSHER</h3>
+                  <p className="text-sm font-medium mt-1 text-primary/80">Guild Leader</p>
+                </div>
+                <span className="font-heading text-[10px] tracking-[0.2em] uppercase bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/30">Founder</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Officers Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 max-w-2xl mx-auto">
+            {members.filter(m => m.tier === "officer").map((member) => (
+              <div
+                key={member.name}
+                className="group relative border rounded-lg p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-neon-cyan/5 border-neon-cyan/40 box-glow-cyan"
+              >
+                <div className="flex flex-col items-center text-center gap-3">
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center bg-neon-cyan/15">
+                    <member.icon className="w-7 h-7 text-neon-cyan" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg font-bold tracking-wide text-neon-cyan text-glow-cyan">{member.name}</h3>
+                    <p className="text-sm font-medium mt-1 text-neon-cyan/70">{member.role}</p>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
+          </div>
+
+          {/* Elite Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {members.filter(m => m.tier === "elite").map((member) => (
+              <div
+                key={member.name}
+                className="group relative border rounded-lg p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-primary/5 border-primary/20 shadow-[0_0_10px_rgba(255,0,51,0.08)]"
+              >
+                <div className="flex flex-col items-center text-center gap-3">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-primary/10">
+                    <member.icon className="w-5 h-5 text-primary/60" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-base font-bold tracking-wide text-foreground">{member.name}</h3>
+                    <p className="text-sm font-medium mt-1 text-muted-foreground">{member.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
