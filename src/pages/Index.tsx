@@ -2,11 +2,11 @@ import { Shield, Users, Crown, Mail, Phone, MapPin, Swords, Zap } from "lucide-r
 import logo from "@/assets/bd-gung-logo.png";
 
 const members = [
-  { name: "BUGRUSHER", role: "Guild Leader", icon: Crown },
-  { name: "WEMMBU", role: "Acting Leader", icon: Crown },
-  { name: "AKIYA", role: "Elite Member", icon: Swords },
-  { name: "KING RUCHI", role: "Elite Member", icon: Swords },
-  { name: "CHAMO BOY", role: "Elite Member", icon: Swords },
+  { name: "BUGRUSHER", role: "Guild Leader", icon: Crown, tier: "leader" as const },
+  { name: "WEMMBU", role: "Acting Leader", icon: Crown, tier: "officer" as const },
+  { name: "AKIYA", role: "Top Rusher", icon: Zap, tier: "officer" as const },
+  { name: "KING RUCHI", role: "Elite Member", icon: Swords, tier: "elite" as const },
+  { name: "CHAMO BOY", role: "Elite Member", icon: Swords, tier: "elite" as const },
 ];
 
 const Index = () => {
