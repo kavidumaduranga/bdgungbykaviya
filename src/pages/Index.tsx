@@ -3,7 +3,7 @@ import logo from "@/assets/bd-gung-logo.png";
 
 const members = [
   { name: "BUGRUSHER", role: "Guild Leader", icon: Crown },
-  { name: "WEMMBU", role: "Elite Member", icon: Swords },
+  { name: "WEMMBU", role: "Acting Leader", icon: Crown },
   { name: "AKIYA", role: "Elite Member", icon: Swords },
   { name: "KING RUCHI", role: "Elite Member", icon: Swords },
   { name: "CHAMO BOY", role: "Elite Member", icon: Swords },
