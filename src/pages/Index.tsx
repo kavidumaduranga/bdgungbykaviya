@@ -2,11 +2,11 @@ import { Shield, Users, Crown, Mail, Phone, MapPin, Swords, Zap } from "lucide-r
 import logo from "@/assets/bd-gung-logo.png";
 
 const members = [
-  { name: "BUGRUSHER", role: "Guild Leader", icon: Crown },
-  { name: "WEMMBU", role: "Acting Leader", icon: Crown },
-  { name: "AKIYA", role: "Elite Member", icon: Swords },
-  { name: "KING RUCHI", role: "Elite Member", icon: Swords },
-  { name: "CHAMO BOY", role: "Elite Member", icon: Swords },
+  { name: "BUGRUSHER", role: "Guild Leader", icon: Crown, tier: "leader" as const },
+  { name: "WEMMBU", role: "Acting Leader", icon: Crown, tier: "officer" as const },
+  { name: "AKIYA", role: "Top Rusher", icon: Zap, tier: "officer" as const },
+  { name: "KING RUCHI", role: "Elite Member", icon: Swords, tier: "elite" as const },
+  { name: "CHAMO BOY", role: "Elite Member", icon: Swords, tier: "elite" as const },
 ];
 
 const Index = () => {
@@ -71,28 +71,36 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {members.map((member, i) => {
-              const isLeader = member.role === "Guild Leader";
+            {members.map((member) => {
+              const isLeader = member.tier === "leader";
+              const isOfficer = member.tier === "officer";
+              const isElite = member.tier === "elite";
               return (
                 <div
                   key={member.name}
-                  className={`group relative border rounded-lg p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 ${
+                  className={`group relative border rounded-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 ${
                     isLeader
-                      ? "bg-primary/10 border-glow-red box-glow-red col-span-1 sm:col-span-2 lg:col-span-1 lg:col-start-2"
-                      : "bg-card/50 border-border hover:border-glow-cyan hover:box-glow-cyan"
+                      ? "p-6 bg-primary/10 border-glow-red box-glow-red col-span-1 sm:col-span-2 lg:col-span-1 lg:col-start-2"
+                      : isOfficer
+                      ? "p-6 bg-neon-cyan/5 border-neon-cyan/40 box-glow-cyan"
+                      : "p-5 bg-card/50 border-border hover:border-primary/30"
                   }`}
                 >
                   <div className="flex flex-col items-center text-center gap-3">
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center ${
-                      isLeader ? "bg-primary/20" : "bg-secondary"
+                    <div className={`rounded-full flex items-center justify-center ${
+                      isLeader ? "w-14 h-14 bg-primary/20" : isOfficer ? "w-14 h-14 bg-neon-cyan/15" : "w-11 h-11 bg-secondary"
                     }`}>
-                      <member.icon className={`w-7 h-7 ${isLeader ? "text-primary" : "text-neon-cyan"}`} />
+                      <member.icon className={`${isLeader ? "w-7 h-7 text-primary" : isOfficer ? "w-7 h-7 text-neon-cyan" : "w-5 h-5 text-muted-foreground"}`} />
                     </div>
                     <div>
-                      <h3 className={`font-heading text-lg font-bold tracking-wide ${isLeader ? "text-primary text-glow-red" : "text-foreground"}`}>
+                      <h3 className={`font-heading font-bold tracking-wide ${
+                        isLeader ? "text-lg text-primary text-glow-red" : isOfficer ? "text-lg text-neon-cyan text-glow-cyan" : "text-base text-foreground"
+                      }`}>
                         {member.name}
                       </h3>
-                      <p className={`text-sm font-medium mt-1 ${isLeader ? "text-primary/80" : "text-muted-foreground"}`}>
+                      <p className={`text-sm font-medium mt-1 ${
+                        isLeader ? "text-primary/80" : isOfficer ? "text-neon-cyan/70" : "text-muted-foreground"
+                      }`}>
                         {member.role}
                       </p>
                     </div>
